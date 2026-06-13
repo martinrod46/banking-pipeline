@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: banking_raw
+    database: banking-pipeline-499102
+    schema: banking_raw
+    tables:
+      - name: customers
+      - name: transactions
+      - name: fraud_flags
+      - name: accounts
