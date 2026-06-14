@@ -13,9 +13,9 @@ services:
       - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
       - postgres_data:/var/lib/postgresql/data
     command:
-      - "postgres"
-      - "-c"
-      - "wal_level=logical"
+      - postgres
+      - -c
+      - wal_level=logical
 
   airflow_postgres:
     image: postgres:15
@@ -64,16 +64,21 @@ services:
       CONFIG_STORAGE_TOPIC: debezium_configs
       OFFSET_STORAGE_TOPIC: debezium_offsets
       STATUS_STORAGE_TOPIC: debezium_status
+
       CONNECT_BOOTSTRAP_SERVERS: banking_kafka:9092
       CONNECT_REST_PORT: 8083
       CONNECT_GROUP_ID: debezium-group
+
       CONNECT_CONFIG_STORAGE_TOPIC: debezium_configs
       CONNECT_OFFSET_STORAGE_TOPIC: debezium_offsets
       CONNECT_STATUS_STORAGE_TOPIC: debezium_status
+
       CONNECT_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
       CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+
       CONNECT_INTERNAL_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
       CONNECT_INTERNAL_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+
       CONNECT_REST_ADVERTISED_HOST_NAME: debezium
 
   airflow:
@@ -86,8 +91,8 @@ services:
     environment:
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@airflow_postgres/airflow
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
-      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
-      AIRFLOW__WEBSERVER__WORKERS: '1'
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__WEBSERVER__WORKERS: "1"
       GOOGLE_APPLICATION_CREDENTIALS: /opt/airflow/gcp-credentials.json
     volumes:
       - ./airflow/dags:/opt/airflow/dags
@@ -95,5 +100,5 @@ services:
     command: standalone
     restart: on-failure
 
-  volumes:
-    postgres_data:
+volumes:
+  postgres_data:
