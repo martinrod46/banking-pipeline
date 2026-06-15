@@ -125,6 +125,58 @@ def load_transactions():
     job.result()
     print(f"Loaded {len(bq_rows)} transactions into BigQuery!")
 
+def load_accounts():
+    pg = psycopg2.connect(
+        host="banking_postgres",
+        port="5432",
+        database="banking_db",
+        user="banking_user",
+        password="banking_pass"
+    )
+    cursor = pg.cursor()
+    cursor.execute("SELECT * FROM accounts;")
+    rows = cursor.fetchall()
+    cursor.close()
+    pg.close()
+
+    if not rows:
+        print("No rows to insert, skipping!")
+        return
+
+    client = bigquery.Client(project="banking-pipeline-499102")
+    table_id = "banking-pipeline-499102.banking_raw.accounts"
+
+    job_config = bigquery.LoadJobConfig(
+        write_disposition=bigquery.WriteDisposition.WRITE_TRUNCATE,
+        schema=[
+            bigquery.SchemaField("account_id", "INTEGER"),
+            bigquery.SchemaField("customer_id", "INTEGER"),
+            bigquery.SchemaField("account_type", "STRING"),
+            bigquery.SchemaField("account_status", "STRING"),
+            bigquery.SchemaField("balance", "FLOAT"),
+            bigquery.SchemaField("currency", "STRING"),
+            bigquery.SchemaField("opened_at", "TIMESTAMP"),
+            bigquery.SchemaField("updated_at", "TIMESTAMP"),
+        ]
+    )
+
+    bq_rows = []
+    for row in rows:
+        bq_rows.append({
+            "account_id":     row[0],
+            "customer_id":    row[1],
+            "account_type":   row[2],
+            "account_status": row[3],
+            "balance":        float(row[4]) if row[4] else None,
+            "currency":       row[5],
+            "opened_at":      str(row[6]) if row[6] else None,
+            "updated_at":     str(row[7]) if row[7] else None,
+        })
+
+    job = client.load_table_from_json(bq_rows, table_id, job_config=job_config)
+    job.result()
+    print(f"Loaded {len(bq_rows)} accounts into BigQuery!")
+
 def load_fraud_flags():
     pg = psycopg2.connect(
         host="banking_postgres",
@@ -186,13 +238,18 @@ with DAG(
     )
 
     t2 = PythonOperator(
+        task_id='load_accounts',
+        python_callable=load_accounts,
+    )
+
+    t3 = PythonOperator(
         task_id='load_transactions',
         python_callable=load_transactions,
     )
 
-    t3 = PythonOperator(
+    t4 = PythonOperator(
         task_id='load_fraud_flags',
         python_callable=load_fraud_flags,
     )
 
-    t1 >> t2 >> t3
+    t1 >> t2 >> t3 >> t4
