@@ -4,6 +4,8 @@ End-to-end real-time data pipeline that captures banking transactions from Postg
 
 ---
 
+<br>
+
 ## Architecture
 
 ```text
@@ -24,6 +26,8 @@ Looker Studio
 
 ---
 
+<br>
+
 ## Project Overview
 
 This project simulates a modern banking environment where transaction data is continuously generated and processed in real time.
@@ -31,6 +35,8 @@ This project simulates a modern banking environment where transaction data is co
 The pipeline captures database changes using Change Data Capture (CDC), streams events through Kafka, loads data into BigQuery, transforms raw data into analytics-ready models with dbt, and exposes business insights through interactive dashboards in Looker Studio.
 
 ---
+
+<br>
 
 ## Tech Stack
 
@@ -46,6 +52,8 @@ The pipeline captures database changes using Change Data Capture (CDC), streams 
 | Containerization       | Docker Compose  |
 
 ---
+
+<br>
 
 ## Data Layers
 
@@ -63,6 +71,8 @@ Business-ready analytical models optimized for reporting and dashboard consumpti
 
 ---
 
+<br>
+
 ## Features
 
 * Real-time Change Data Capture (CDC) using Debezium
@@ -76,6 +86,8 @@ Business-ready analytical models optimized for reporting and dashboard consumpti
 * Fully containerized local development environment
 
 ---
+
+<br>
 
 ## Project Structure
 
@@ -104,6 +116,8 @@ banking-pipeline/
 
 ---
 
+<br>
+
 ## Analytical Models
 
 ### mart_customer_summary
@@ -126,6 +140,8 @@ Fraud monitoring metrics including:
 
 ---
 
+<br>
+
 ## Reporting Layer
 
 Business-facing dashboards are built in Looker Studio using curated dbt models stored in BigQuery.
@@ -138,6 +154,8 @@ Business-facing dashboards are built in Looker Studio using curated dbt models s
 * Banking Operations KPI Dashboard
 
 ---
+
+<br>
 
 ## Quick Start
 
@@ -166,6 +184,8 @@ dbt run
 
 ---
 
+<br>
+
 ## Skills Demonstrated
 
 * Change Data Capture (CDC) with Debezium
@@ -181,6 +201,8 @@ dbt run
 
 ---
 
+<br>
+
 ## Future Improvements
 
 * Streaming analytics with Spark Structured Streaming
@@ -191,6 +213,8 @@ dbt run
 * Automated monitoring and alerting
 
 ---
+
+<br>
 
 ## Screenshots
 
