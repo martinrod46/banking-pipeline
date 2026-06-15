@@ -213,19 +213,17 @@ dbt run
 * Automated monitoring and alerting
 
 ---
+## Airflow DAG
 
-<br>
-
-![Airflow DAG](images/airflow_dag.png)
+![Airflow DAG](images/dag.png)
 
 ## BigQuery Tables
 
-![BigQuery Tables](images/bigquery_tables.png)
+![BigQuery Tables](images/bigquery.png)
 
 ## Looker Studio Dashboard
 
 ![Looker Studio Dashboard](images/looker_dashboard.png)
-
 ---
 
 Built to showcase modern Data Engineering and Analytics Engineering practices, from data ingestion to business intelligence.
