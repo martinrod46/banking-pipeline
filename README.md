@@ -216,17 +216,13 @@ dbt run
 
 <br>
 
-## Screenshots
-
-### Airflow DAG
-
 ![Airflow DAG](images/airflow_dag.png)
 
-### BigQuery Tables
+## BigQuery Tables
 
 ![BigQuery Tables](images/bigquery_tables.png)
 
-### Looker Studio Dashboard
+## Looker Studio Dashboard
 
 ![Looker Studio Dashboard](images/looker_dashboard.png)
 
