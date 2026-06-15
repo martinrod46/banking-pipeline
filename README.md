@@ -1,6 +1,6 @@
 # 🏦 Banking Data Pipeline
 
-End-to-end real-time data pipeline that captures banking transactions from PostgreSQL, streams changes through Kafka, orchestrates data movement with Airflow, loads data into BigQuery, and transforms it into analytics-ready models using dbt.
+End-to-end real-time data pipeline that captures banking transactions from PostgreSQL, streams changes through Kafka, orchestrates data movement with Airflow, loads data into BigQuery, transforms data with dbt, and delivers business insights through Looker Studio dashboards.
 
 ---
 
@@ -18,6 +18,8 @@ Apache Airflow
 Google BigQuery
     ↓
 dbt
+    ↓
+Looker Studio
 ```
 
 ---
@@ -26,21 +28,22 @@ dbt
 
 This project simulates a modern banking environment where transaction data is continuously generated and processed in real time.
 
-The pipeline captures database changes using Change Data Capture (CDC), streams events through Kafka, loads data into BigQuery, and builds dimensional models for reporting and analytics.
+The pipeline captures database changes using Change Data Capture (CDC), streams events through Kafka, loads data into BigQuery, transforms raw data into analytics-ready models with dbt, and exposes business insights through interactive dashboards in Looker Studio.
 
 ---
 
 ## Tech Stack
 
-| Layer | Technology |
-|---------|------------|
-| Source Database | PostgreSQL 15 |
-| CDC | Debezium |
-| Streaming Platform | Apache Kafka |
-| Workflow Orchestration | Apache Airflow |
-| Data Warehouse | Google BigQuery |
-| Transformations | dbt |
-| Containerization | Docker Compose |
+| Layer                  | Technology      |
+| ---------------------- | --------------- |
+| Source Database        | PostgreSQL 15   |
+| CDC                    | Debezium        |
+| Streaming Platform     | Apache Kafka    |
+| Workflow Orchestration | Apache Airflow  |
+| Data Warehouse         | Google BigQuery |
+| Transformations        | dbt             |
+| BI & Reporting         | Looker Studio   |
+| Containerization       | Docker Compose  |
 
 ---
 
@@ -56,19 +59,21 @@ Cleaned and standardized datasets used as the foundation for downstream transfor
 
 ### Marts
 
-Business-ready analytical models designed for reporting and dashboard consumption.
+Business-ready analytical models optimized for reporting and dashboard consumption.
 
 ---
 
 ## Features
 
-- Real-time Change Data Capture (CDC)
-- Event-driven architecture using Kafka
-- Automated data ingestion via Airflow
-- SCD Type 2 customer history tracking
-- Fraud detection and transaction monitoring marts
-- Cloud-based analytics with BigQuery
-- Fully containerized local development environment
+* Real-time Change Data Capture (CDC) using Debezium
+* Event-driven architecture powered by Kafka
+* Automated data ingestion and orchestration with Airflow
+* SCD Type 2 customer history tracking
+* Fraud detection and transaction monitoring marts
+* Analytics-ready dimensional models built with dbt
+* Cloud-based analytics using BigQuery
+* Interactive dashboards built in Looker Studio
+* Fully containerized local development environment
 
 ---
 
@@ -79,6 +84,7 @@ banking-pipeline/
 │
 ├── airflow/
 │   └── dags/
+│       └── banking_pipeline_dag.py
 │
 ├── postgres/
 │   └── init.sql
@@ -104,19 +110,32 @@ banking-pipeline/
 
 Customer-level KPIs including:
 
-- Total transaction amount
-- Transaction count
-- Failed transaction count
-- Average transaction value
+* Total transaction amount
+* Transaction count
+* Failed transaction count
+* Average transaction value
 
 ### mart_fraud_summary
 
 Fraud monitoring metrics including:
 
-- High-risk transactions
-- Transaction categories
-- Amount thresholds
-- Fraud indicators
+* High-risk transactions
+* Transaction categories
+* Amount thresholds
+* Fraud indicators
+
+---
+
+## Reporting Layer
+
+Business-facing dashboards are built in Looker Studio using curated dbt models stored in BigQuery.
+
+### Example Dashboards
+
+* Customer Performance Overview
+* Transaction Monitoring Dashboard
+* Fraud Detection Dashboard
+* Banking Operations KPI Dashboard
 
 ---
 
@@ -124,10 +143,10 @@ Fraud monitoring metrics including:
 
 ### Prerequisites
 
-- Docker Desktop
-- Python 3.10+
-- Google Cloud Project
-- BigQuery Dataset
+* Docker Desktop
+* Python 3.10+
+* Google Cloud Project
+* BigQuery Dataset
 
 ### Run Locally
 
@@ -147,27 +166,29 @@ dbt run
 
 ---
 
-## Learning Objectives
+## Skills Demonstrated
 
-This project demonstrates practical experience with:
-
-- Change Data Capture (CDC)
-- Event Streaming
-- Data Warehouse Design
-- Dimensional Modeling
-- SCD Type 2 Implementation
-- Workflow Orchestration
-- Containerized Data Platforms
+* Change Data Capture (CDC) with Debezium
+* Event Streaming with Kafka
+* Workflow Orchestration with Airflow
+* BigQuery Data Warehousing
+* Dimensional Modeling
+* SCD Type 2 Implementation
+* dbt Data Transformations
+* Dashboard Development with Looker Studio
+* Docker-Based Deployment
+* End-to-End Analytics Engineering
 
 ---
 
 ## Future Improvements
 
-- Streaming analytics with Spark Structured Streaming
-- Data quality testing with Great Expectations
-- CI/CD deployment pipeline
-- Kafka schema management using Schema Registry
-- Infrastructure as Code with Terraform
+* Streaming analytics with Spark Structured Streaming
+* Data quality testing with Great Expectations
+* CI/CD deployment pipeline
+* Kafka Schema Registry integration
+* Infrastructure as Code with Terraform
+* Automated monitoring and alerting
 
 ---
 
@@ -181,10 +202,10 @@ This project demonstrates practical experience with:
 
 ![BigQuery Tables](images/bigquery_tables.png)
 
-### Analytics Dashboard
+### Looker Studio Dashboard
 
-![Analytics Dashboard](images/dashboard.png)
+![Looker Studio Dashboard](images/looker_dashboard.png)
 
 ---
 
-Built to showcase modern Data Engineering and Analytics Engineering practices.
+Built to showcase modern Data Engineering and Analytics Engineering practices, from data ingestion to business intelligence.
