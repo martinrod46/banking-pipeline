@@ -1,16 +1,21 @@
-# Real-Time Banking Data Pipeline 🏦
+# Banking Data Pipeline 🏦
 
-A production-style streaming data pipeline built entirely with free and open-source tools.
+A streaming data pipeline built entirely with free and open-source tools.
+
+<br>
 
 ## Architecture
 
 ```
 PostgreSQL → Debezium → Kafka → Airflow → BigQuery → dbt
 ```
+<br>
 
-## What it does
+## What it does?
 
 Simulates a real banking system with live transaction data, streams every database change in real time using CDC (Change Data Capture), loads it into a cloud data warehouse, and transforms it into business-ready models.
+
+<br>
 
 ## Tech Stack
 
@@ -24,11 +29,15 @@ Simulates a real banking system with live transaction data, streams every databa
 | Transformations | dbt |
 | Infrastructure | Docker + Docker Compose |
 
+<br>
+
 ## Pipeline Layers
 
 - **Raw** — direct CDC events from PostgreSQL
 - **Staging** — cleaned and validated data
 - **Marts** — business-ready models including customer summaries and fraud analysis
+
+<br>
 
 ## Key Features
 
@@ -37,6 +46,8 @@ Simulates a real banking system with live transaction data, streams every databa
 - SCD2 customer tracking — full history of address and contact changes
 - Fraud detection summary by transaction type and amount category
 - Fully containerized — runs with a single `docker-compose up -d`
+
+<br>
 
 ## Quick Start
 
@@ -57,6 +68,7 @@ python data_generator/generate.py
 cd dbt/banking_dbt
 dbt run
 ```
+<br>
 
 ## Project Structure
 
@@ -76,12 +88,15 @@ banking-pipeline/
             ├── staging/                 # Cleaned source data
             └── marts/                  # Business models
 ```
+<br>
 
 ## Data Models
 
 **mart_customer_summary** — total spend, transaction count, and failed transactions per customer
 
 **mart_fraud_summary** — fraud flags broken down by transaction type and amount category
+
+<br>
 
 ## Author
 
